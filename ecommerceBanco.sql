@@ -1,4 +1,4 @@
-CREATE TABLE ecommerce;
+CREATE DATABASE ecommerce;
 USE ecommerce;
 
 CREATE TABLE categoria (
