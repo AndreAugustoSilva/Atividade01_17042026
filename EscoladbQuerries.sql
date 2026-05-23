@@ -110,12 +110,12 @@ SELECT * FROM Matriculas;
 
 -- 1. Mostre os alunos que possuem nota maior que 8.
 
-SELECT id_aluno FROM Matriculas
+SELECT id_aluno, nota FROM Matriculas
 WHERE nota > 8;
 
 -- 2. Liste os alunos que tiveram mais de 5 faltas.
 
-SELECT id_aluno FROM Matriculas
+SELECT id_aluno, faltas FROM Matriculas
 WHERE faltas > 5;
 
 -- 3. Exiba os cursos com carga horária igual a 80 horas.
@@ -218,7 +218,7 @@ GROUP BY idade;
 
 -- 1. Liste as cidades que possuem mais de 2 alunos.
 
-SELECT cidade FROM Alunos
+SELECT cidade, COUNT(id_aluno) AS QuantidadeAlunos FROM Alunos
 GROUP BY cidade
 HAVING COUNT(id_aluno) > 2;
 
