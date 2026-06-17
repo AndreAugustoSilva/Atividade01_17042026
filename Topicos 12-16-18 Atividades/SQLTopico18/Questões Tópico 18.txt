@@ -1,0 +1,72 @@
+1 - Identifique possíveis problemas de redundância existentes nos dados.
+
+Com base no que foi visto no banco de dados apresentado, identifiquei os seguintes problemas:
+
+- Uma repetição no código da OS, sem o uso de uma entidade associativa para associarmos mais peças a uma única ordem de serviço, foi usado o mesmo ID para representar o uso de outra peça.
+- Foram abertas duas OS para solucionarmos o mesmo problema por conta da mudança de técnico, e para cada OS é mostrada todos os detalhes dos atributos de outras possíveis entidades na mesma tabela, causando muitas repetições desnecessárias de inserções.
+
+O principal problema observado foi justamente o fato de estar tudo embaralhado em uma tabela apenas. Qualquer mudança de atributos ocasionaria na repetição completa de uma linha inteira, como o que foi visto no primeiro tópico.
+
+2 - Identifique exemplos de:
+
+Anomalia de inclusão:
+A inclusão de um novo equipamento, por exemplo, não seria possível, pois o mesmo necessita do código da OS para ser cadastrado.
+
+Anomalia de exclusão:
+A peça "sensor X" só aparece junto com a técnica "Maria Souza". Se o sensor for excluído, o cadastro de Maria também será excluído, e vice-versa.
+
+Anomalia de atualização:
+Uma mudança de telefone causaria a necessidade de alterações em todas as outras linhas em que o mesmo apareceria.
+
+3 - Analise as dependências funcionais existentes na estrutura.
+
+Todas as colunas extras, fora o que é apresentado na OS, são totalmente dependentes de outras. Como por exemplo, temos a coluna "TelefoneCliente", que depende estritamente do cliente, e não de qualquer outra coluna na tabela.
+
+4 - Verifique a necessidade de aplicação da:
+
+- Primeira Forma Normal (1FN):
+A tabela precisa de uma chave primária.
+
+- Segunda Forma Normal (2FN):
+Tudo aquilo que dependeria de uma coluna identificadora deve ser jogado para uma tabela separada, e cardinalidades onde as relações são de muitos para muitos devem ter entidades associativas, apenas com atributos dependentes da chave composta.
+
+- Terceira Forma Normal (3FN):
+Qualquer coluna deve depender exclusivamente da chave principal da tabela, sem relações inúteis entre as colunas.
+
+5 - Realize o processo de normalização até o nível considerado necessário para a situação apresentada.
+
+O código está no arquivo SQL.
+
+6 - Apresente as entidades resultantes da normalização contendo:
+
+- atributos;
+- chave primária;
+- chaves estrangeiras (quando aplicável).
+- constraints
+
+Estão no modelo físico.
+
+7 - Descreva os relacionamentos existentes entre as entidades geradas.(aplique o modelo conceitual e lógico)
+
+Estão no DER.
+
+TÉCNICOS 1,1 - 1,N OS
+CLIENTES 1,1 - 1,N OS
+EQUIPAMENTOS 1,1 - 1,N OS
+EQUIPAMENTOS 1,N - 1,1 CATEGORIAS
+OS 1,N - 1,N PECAS
+FORNECEDORES 1,1 - 1,N PECAS
+
+8 - 
+
+Fiz uma divisão em tabelas, uma para cada entidade identificada (organização e facilidade de compreensão);
+
+Coloquei cada coluna em seu devido lugar no que diz a respeito de sua entidade(relacionado a boas práticas e a 3fn(cada coluna serve apenas à sua chave principal));
+
+Evitei a criação de tabelas desnecessárias (sem desperdícios);
+
+Adicionei o nome do fornecedor dentro de sua própria tabela, e não como um atributo de peça (requisitos de negócio, visto que fornecedor tinha seus próprios atributos).
+
+9 - 
+
+Toda a redundância de repetições desnecessárias de mostra em cada linha do banco quando algo é solicitado, mas sobretudo toda a visualização do banco e a praticidade com que as consultas podem ser realizadas, sem processamento desnecessário para outras informações fúteis quando desejo ver algo específico do banco.
